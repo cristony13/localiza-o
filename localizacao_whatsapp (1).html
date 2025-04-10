@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Localização</title>
+  <script>
+    function sendLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          var mapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+          var message = `Oi, essa é minha localização: ${mapsLink}`;
+          var phone = "558893673327";
+          var whatsappLink = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+          window.location.href = whatsappLink;
+        }, function(error) {
+          document.body.innerHTML = "<h3>Não foi possível obter a localização. Permita o acesso à localização e tente novamente.</h3>";
+        });
+      } else {
+        document.body.innerHTML = "<h3>Seu navegador não suporta geolocalização.</h3>";
+      }
+    }
+    window.onload = sendLocation;
+  </script>
+</head>
+<body>
+  <h2>Coletando sua localização...</h2>
+</body>
+</html>
